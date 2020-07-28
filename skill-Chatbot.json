@@ -1,0 +1,624 @@
+{
+  "intents": [
+    {
+      "intent": "Movements",
+      "examples": [
+        {
+          "text": "return"
+        },
+        {
+          "text": "move to right"
+        },
+        {
+          "text": "go back"
+        },
+        {
+          "text": "go to backward"
+        },
+        {
+          "text": "slow down"
+        },
+        {
+          "text": "don`t moving"
+        },
+        {
+          "text": "turn right"
+        },
+        {
+          "text": "turn left"
+        },
+        {
+          "text": "move to forward"
+        },
+        {
+          "text": "stop"
+        },
+        {
+          "text": "go to forward"
+        },
+        {
+          "text": "move to left"
+        },
+        {
+          "text": "can you go ahead"
+        },
+        {
+          "text": "move to backward"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "ThankYou",
+      "examples": [
+        {
+          "text": "good jop"
+        },
+        {
+          "text": "thank you"
+        },
+        {
+          "text": "bye"
+        },
+        {
+          "text": "good bye"
+        },
+        {
+          "text": "you made my day"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greeting",
+      "examples": [
+        {
+          "text": "what is your name"
+        },
+        {
+          "text": "how are you"
+        },
+        {
+          "text": "afternoon"
+        },
+        {
+          "text": "evening"
+        },
+        {
+          "text": "good evening"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "good morning"
+        },
+        {
+          "text": "whats up"
+        },
+        {
+          "text": "morning"
+        },
+        {
+          "text": "good afternoon"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "how can you help me"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "apply_movements",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "backward",
+          "synonyms": [
+            "back",
+            "return"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "forward",
+          "synonyms": [
+            "ahead"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "left",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "right",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "stop",
+          "synonyms": [
+            "slow down",
+            "don`t move",
+            "do not move"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greeting",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "how can you help me",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "name",
+          "synonyms": [
+            "names",
+            "surname",
+            "nickname"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "hi",
+          "synonyms": [
+            "hello",
+            "hey",
+            "howdy",
+            "hallo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "how are you",
+          "synonyms": [
+            "are you okay"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1595466024275",
+      "event_name": "focus",
+      "dialog_node": "handler_9_1595466024280",
+      "previous_sibling": "handler_7_1595466024280"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1595466024275",
+      "context": {
+        "_stop": "@apply_movements:stop"
+      },
+      "conditions": "@apply_movements:stop",
+      "event_name": "input",
+      "dialog_node": "handler_7_1595466024280"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "disabled": true,
+      "conditions": "welcome",
+      "dialog_node": "response_8_1595201630735"
+    },
+    {
+      "type": "standard",
+      "title": "stop",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "OK, I will stop"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1595043146101",
+      "conditions": "@apply_movements:stop",
+      "dialog_node": "node_3_1595043958808",
+      "previous_sibling": "node_10_1595043248479"
+    },
+    {
+      "type": "standard",
+      "title": "apply movements",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": " OK, I will move to @apply_movements"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1595043146101",
+      "conditions": "@apply_movements != \"stop\"",
+      "dialog_node": "node_10_1595043248479",
+      "previous_sibling": "slot_7_1595466024275"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1595043146101",
+      "variable": "$_backward",
+      "dialog_node": "slot_2_1595465996409",
+      "previous_sibling": "slot_7_1595465949249"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1595043146101",
+      "variable": "$_left",
+      "dialog_node": "slot_5_1595465920876",
+      "previous_sibling": "slot_1_1595465869917"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1595043146101",
+      "variable": "$_right",
+      "dialog_node": "slot_1_1595465869917",
+      "previous_sibling": "handler_1_1595465869497"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1595043146101",
+      "variable": "$_forward",
+      "dialog_node": "slot_7_1595465949249",
+      "previous_sibling": "slot_5_1595465920876"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1595043146101",
+      "variable": "$_stop",
+      "dialog_node": "slot_7_1595466024275",
+      "previous_sibling": "slot_2_1595465996409"
+    },
+    {
+      "type": "event_handler",
+      "parent": "node_6_1595043146101",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1595465869497"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "my name is reslaan"
+              },
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1594966536504",
+      "conditions": "@greeting:name",
+      "dialog_node": "response_4_1595200994173",
+      "previous_sibling": "response_10_1595201396296"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "@greeting"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1594966536504",
+      "conditions": "@greeting:hi",
+      "dialog_node": "response_2_1595202858546",
+      "previous_sibling": "response_3_1595202221972"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I can help you to control the robot for example, move it to the right, left, forward or backward."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1594966536504",
+      "conditions": "@greeting:(how can you help me)",
+      "dialog_node": "response_3_1595202221972",
+      "previous_sibling": "response_4_1595200994173"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I am fine "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1594966536504",
+      "conditions": "@greeting:(how are you)",
+      "dialog_node": "response_10_1595201396296"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1595465949249",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1595465949252",
+      "previous_sibling": "handler_5_1595465949252"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1595465949249",
+      "context": {
+        "_forward": "@apply_movements:forward"
+      },
+      "conditions": "@apply_movements:forward",
+      "event_name": "input",
+      "dialog_node": "handler_5_1595465949252"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1595465869917",
+      "event_name": "focus",
+      "dialog_node": "handler_8_1595465869936",
+      "previous_sibling": "handler_2_1595465869936"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1595465869917",
+      "context": {
+        "_right": "@apply_movements:right"
+      },
+      "conditions": "@apply_movements:right",
+      "event_name": "input",
+      "dialog_node": "handler_2_1595465869936"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1595465920876",
+      "event_name": "focus",
+      "dialog_node": "handler_5_1595465920880",
+      "previous_sibling": "handler_8_1595465920880"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1595465920876",
+      "context": {
+        "_left": "@apply_movements:left"
+      },
+      "conditions": "@apply_movements:left",
+      "event_name": "input",
+      "dialog_node": "handler_8_1595465920880"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1595465996409",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1595465996412",
+      "previous_sibling": "handler_3_1595465996412"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1595465996409",
+      "context": {
+        "_backward": "@apply_movements:backward"
+      },
+      "conditions": "@apply_movements:backward",
+      "event_name": "input",
+      "dialog_node": "handler_3_1595465996412"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Greeting",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1594966536504",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "thankful",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You are welcome"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#ThankYou",
+      "dialog_node": "node_9_1595202966029",
+      "previous_sibling": "node_6_1595043146101"
+    },
+    {
+      "type": "frame",
+      "title": "movements",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#Movements",
+      "dialog_node": "node_6_1595043146101",
+      "previous_sibling": "node_2_1594966536504"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_9_1595202966029",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {
+        "_customization": {
+          "mcr": false
+        }
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Chatbot",
+  "language": "en",
+  "description": ""
+}
